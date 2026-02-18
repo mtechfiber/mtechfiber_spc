@@ -6,74 +6,83 @@
 <title>Service Temporarily Restricted</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #0f172a, #0b1120);
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 
 .card {
-  width: 380px;
+  width: 100%;
+  max-width: 500px;
   background: #1e293b;
-  border-radius: 18px;
-  padding: 25px;
+  border-radius: 20px;
+  padding: 30px;
   text-align: center;
   color: #fff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  margin: 40px 0;
 }
 
 .card h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .subtitle {
-  font-size: 13px;
+  font-size: 14px;
   color: #9ca3af;
-  margin-bottom: 15px;
+  margin: 8px 0 20px;
 }
 
 .alert {
   background: #7f1d1d;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 13px;
-  margin-bottom: 15px;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 .pay-btn {
   background: #22c55e;
   border: none;
-  padding: 12px;
+  padding: 14px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  margin-bottom: 15px;
-  font-size: 14px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.pay-btn:hover {
+  background: #16a34a;
 }
 
 .payment-methods {
   display: flex;
-  justify-content: center;
   gap: 12px;
-  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .method-btn {
   flex: 1;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 12px;
+  border-radius: 12px;
   border: none;
   font-weight: bold;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
+  transition: 0.3s;
 }
 
 .gcash {
@@ -81,60 +90,69 @@ body {
   color: white;
 }
 
+.gcash:hover {
+  background: #0063cc;
+}
+
 .maya {
   background: #00b14f;
   color: white;
 }
 
+.maya:hover {
+  background: #00913f;
+}
+
 .qr-container {
   display: none;
-  margin-top: 15px;
+  margin-top: 20px;
   background: #111827;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 15px;
 }
 
 .qr-container img {
-  width: 200px;
-  border-radius: 10px;
+  width: 220px;
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 10px 0;
 }
 
 .account-box {
   background: #2d3748;
   padding: 15px;
   border-radius: 12px;
-  margin-top: 15px;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 .account-box p {
   margin: 6px 0;
-  font-size: 13px;
 }
 
 .copy-btn {
   background: #16a34a;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 8px;
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .confirm-btn {
-  display: inline-block;
+  display: block;
   background: #374151;
   text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
   color: #fff;
   font-weight: bold;
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 15px;
+  margin-top: 25px;
   text-align: center;
-  width: auto;
-  min-width: 340px;
+  transition: 0.3s;
 }
 
 .confirm-btn:hover {
@@ -142,9 +160,15 @@ body {
 }
 
 .footer {
-  font-size: 11px;
+  font-size: 12px;
   color: #6b7280;
-  margin-top: 15px;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
 }
 </style>
 </head>
@@ -160,7 +184,7 @@ body {
     Please settle your outstanding balance to continue using the internet.
   </div>
 
-  <button class="pay-btn">💳Pay Now</button>
+  <button class="pay-btn">💳 Pay Now</button>
 
   <div class="payment-methods">
     <button class="method-btn gcash" onclick="showGCash()">GCash</button>
@@ -191,7 +215,6 @@ body {
     </div>
   </div>
 
-  <!-- CONFIRM BUTTON -->
   <a href="https://www.facebook.com/mtechfiberservices" 
      target="_blank" 
      class="confirm-btn">
@@ -222,5 +245,3 @@ function showMaya() {
 
 </body>
 </html>
-
-
