@@ -3,153 +3,211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scan to Pay via GCash</title>
+<title>Service Temporarily Restricted</title>
 
 <style>
 body {
   margin: 0;
   padding: 0;
-  background: #e6e6e6;
   font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #0b1120);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.container {
-  max-width: 420px;
-  margin: 30px auto;
-  background: #ffffff;
+.card {
+  width: 380px;
+  background: #1e293b;
+  border-radius: 18px;
   padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
   text-align: center;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-h2 {
-  color: #0d5cc1;
+.card h2 {
+  margin: 0;
   font-size: 20px;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
 }
 
-.qr-box img {
-  width: 230px;
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+.subtitle {
+  font-size: 13px;
+  color: #9ca3af;
   margin-bottom: 15px;
 }
 
-.info {
-  font-size: 15px;
-  margin: 8px 0;
+.alert {
+  background: #7f1d1d;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 15px;
 }
 
-.gcash-number {
-  color: #0d5cc1;
+.pay-btn {
+  background: #22c55e;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
-.gcash-number:hover {
-  text-decoration: underline;
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
 }
 
-#copy-msg {
-  font-size: 12px;
-  color: green;
-  display: none;
-  margin-top: 5px;
-}
-
-.notice {
-  font-size: 13px;
-  color: #444;
-  margin: 15px 0;
-}
-
-.btn {
-  display: block;
-  padding: 14px;
-  margin: 12px 0;
+.method-btn {
+  flex: 1;
+  padding: 10px;
   border-radius: 10px;
-  text-decoration: none;
-  color: white;
+  border: none;
   font-weight: bold;
-  font-size: 15px;
-  transition: 0.3s;
+  cursor: pointer;
+  font-size: 13px;
 }
 
-.messenger {
-  background: #1877f2;
+.gcash {
+  background: #007dff;
+  color: white;
 }
 
-.messenger:hover {
-  background: #0f5ec4;
+.maya {
+  background: #00b14f;
+  color: white;
 }
 
-.call {
-  background: #2e8b57;
+.qr-container {
+  display: none;
+  margin-top: 15px;
+  background: #111827;
+  padding: 15px;
+  border-radius: 12px;
 }
 
-.call:hover {
-  background: #1f6b3f;
+.qr-container img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.account-box {
+  background: #2d3748;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.account-box p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.copy-btn {
+  background: #16a34a;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.confirm-btn {
+  background: #374151;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.footer {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
+  <h2>Service Temporarily Restricted</h2>
+  <div class="subtitle">Payment Required to Restore Internet Access</div>
 
-  <h2>📲 SCAN TO PAY VIA GCASH</h2>
-
-  <div class="qr-box">
-    <!-- PALITAN MO ITO NG QR IMAGE LINK MO -->
-    <img src="https://i.imgur.com/OEKxpqV.png" alt="GCash QR Code">
+  <div class="alert">
+    Your internet service has been temporarily suspended due to an unpaid balance.
+    Please settle your outstanding balance to continue using the internet.
   </div>
 
-  <div class="info">
-    GCash Name: <strong>MA***N M.</strong>
+  <button class="pay-btn">Pay Now</button>
+
+  <div class="payment-methods">
+    <button class="method-btn gcash" onclick="showGCash()">GCash</button>
+    <button class="method-btn maya" onclick="showMaya()">Maya</button>
   </div>
 
-  <div class="info">
-    GCash Number:
-    <span class="gcash-number" onclick="copyNumber()">
-      09665084666
-    </span>
+  <!-- GCash QR -->
+  <div class="qr-container" id="gcashQR">
+    <p><strong>Scan to Pay via GCash</strong></p>
+    <img src="https://i.imgur.com/DXGhTbY.png" alt="GCash QR">
+
+    <div class="account-box">
+      <p><strong>Account Name:</strong><br> MA***N M.</p>
+      <p><strong>Account Number:</strong><br> 0966-508-4666</p>
+      <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
+    </div>
   </div>
 
-  <div id="copy-msg">✔ Number copied</div>
+  <!-- Maya QR -->
+  <div class="qr-container" id="mayaQR">
+    <p><strong>Scan to Pay via Maya</strong></p>
+    <img src="https://i.imgur.com/DXGhTbY.png" alt="Maya QR">
 
-  <div class="notice">
-    If you have already made a payment, kindly contact us to confirm and reconnect your service. Thank you!
+    <div class="account-box">
+      <p><strong>Account Name:</strong><br> MA***N M.</p>
+      <p><strong>Account Number:</strong><br> 0966-508-4666</p>
+      <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
+    </div>
   </div>
 
-  <a class="btn messenger"
-     href="https://www.facebook.com/mtechfiberservices"
-     target="_blank">
-     💬 Chat us on Messenger
-  </a>
+  <button class="confirm-btn">Confirm Payment</button>
 
-  <a class="btn call" href="tel:+639241030898">
-     📞 Call us: 0924-103-0898
-  </a>
-
+  <div class="footer">
+    © 2026 Mtech Fiber • Secure Access
+  </div>
 </div>
 
 <script>
 function copyNumber() {
-  const number = "09665084666";
-  navigator.clipboard.writeText(number);
+  navigator.clipboard.writeText("0938-010-386");
+  alert("Number copied successfully!");
+}
 
-  const msg = document.getElementById("copy-msg");
-  msg.style.display = "block";
+function showGCash() {
+  document.getElementById("gcashQR").style.display = "block";
+  document.getElementById("mayaQR").style.display = "none";
+}
 
-  setTimeout(() => {
-    msg.style.display = "none";
-  }, 2000);
+function showMaya() {
+  document.getElementById("mayaQR").style.display = "block";
+  document.getElementById("gcashQR").style.display = "none";
 }
 </script>
 
 </body>
 </html>
-
