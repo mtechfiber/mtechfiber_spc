@@ -3,247 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Service Temporarily Restricted</title>
+<title>Service Restricted</title>
 
 <style>
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  margin: 0;
-  padding: 20px;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f172a, #0b1120);
+  height: 100vh;
+  background: linear-gradient(-45deg, #0f172a, #0b1120, #111827, #0a0f1f);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
   display: flex;
   justify-content: center;
+  align-items: center;
+  color: white;
 }
 
-.card {
-  width: 100%;
-  max-width: 500px;
-  background: #1e293b;
-  border-radius: 20px;
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  width: 360px;
   padding: 30px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
   text-align: center;
-  color: #fff;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-  margin: 40px 0;
+  animation: fadeIn 1s ease;
 }
 
-.card h2 {
-  margin: 0;
-  font-size: 22px;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
-.subtitle {
+.logo img {
+  width: 300px;
+  margin-bottom: 15px;
+}
+
+.notice-box {
+  background: rgba(255, 0, 0, 0.15);
+  padding: 12px;
+  border-radius: 10px;
   font-size: 14px;
-  color: #9ca3af;
-  margin: 8px 0 20px;
+  margin: 15px 0;
 }
 
-.alert {
-  background: #7f1d1d;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 1.5;
-}
-
-.pay-btn {
-  background: #22c55e;
-  border: none;
-  padding: 14px;
-  width: 100%;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 15px;
-  transition: 0.3s;
-}
-
-.pay-btn:hover {
-  background: #16a34a;
-}
-
-.payment-methods {
+.payment-group {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   margin-top: 15px;
 }
 
-.method-btn {
+.payment-group button {
   flex: 1;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 14px;
+  border-radius: 10px;
   border: none;
+  color: white;
   font-weight: bold;
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
 }
 
-.gcash {
-  background: #007dff;
-  color: white;
+.gcash-btn { background: #22c55e; }
+.maya-btn { background: #00b14f; }
+
+.confirm-btn,
+.contact-btn {
+  display: block;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: 12px;
+  cursor: pointer;
+  text-align: center;
 }
 
-.gcash:hover {
-  background: #0063cc;
+.confirm-btn { background: #374151; }
+.contact-btn { background: #0084ff; }
+
+.footer {
+  margin-top: 15px;
+  font-size: 12px;
+  opacity: 0.6;
 }
 
-.maya {
-  background: #00b14f;
-  color: white;
-}
-
-.maya:hover {
-  background: #00913f;
-}
-
-.qr-container {
+/* MODALS */
+.modal {
   display: none;
-  margin-top: 20px;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
   background: #111827;
-  padding: 20px;
+  padding: 25px;
   border-radius: 15px;
+  text-align: center;
+  position: relative;
+  width: 320px;
+  animation: fadeIn 0.3s ease;
 }
 
-.qr-container img {
-  width: 220px;
-  max-width: 100%;
-  border-radius: 12px;
-  margin: 10px 0;
-}
-
-.account-box {
-  background: #2d3748;
-  padding: 15px;
-  border-radius: 12px;
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
   margin-top: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* QR INFO */
+.qr-info {
+  margin-top: 15px;
   font-size: 14px;
 }
 
-.account-box p {
-  margin: 6px 0;
+.number-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.number-box {
+  flex: 1;
+  background: rgba(255,255,255,0.08);
+  padding: 8px;
+  border-radius: 6px;
 }
 
 .copy-btn {
-  background: #16a34a;
+  background: #22c55e;
   border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 13px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.confirm-btn {
-  display: block;
-  background: #374151;
-  text-decoration: none;
-  padding: 14px;
-  border-radius: 12px;
-  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
   font-weight: bold;
-  font-size: 15px;
-  margin-top: 25px;
-  text-align: center;
+  cursor: pointer;
+  color: white;
   transition: 0.3s;
 }
 
-.confirm-btn:hover {
-  background: #4b5563;
+.copy-btn:hover {
+  background: #16a34a;
 }
 
-.footer {
+.copied-msg {
   font-size: 12px;
-  color: #6b7280;
-  margin-top: 20px;
+  color: #22c55e;
+  margin-top: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-@media (max-width: 480px) {
-  .card {
-    padding: 20px;
-  }
+.option-btn {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
 }
+
+.fb-btn { background: #1877f2; }
+.call-btn { background: #16a34a; }
+.text-btn { background: #f59e0b; }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
+
+  <div class="logo">
+    <img src="https://i.imgur.com/ujB2RRt.gif">
+  </div>
+
   <h2>Service Temporarily Restricted</h2>
-  <div class="subtitle">Payment Required to Restore Internet Access</div>
 
-  <div class="alert">
+  <div class="notice-box">
     Your internet service has been temporarily suspended due to an unpaid balance.
-    Please settle your outstanding balance to continue using the internet.
+    Please settle your account to restore access.
   </div>
 
-  <button class="pay-btn">💳 Pay Now</button>
-
-  <div class="payment-methods">
-    <button class="method-btn gcash" onclick="showGCash()">GCash</button>
-    <button class="method-btn maya" onclick="showMaya()">Maya</button>
+  <div class="payment-group">
+    <button class="gcash-btn" onclick="openQR('gcash')">💳 GCash</button>
+    <button class="maya-btn" onclick="openQR('maya')">💳 Maya</button>
   </div>
 
-  <!-- GCash QR -->
-  <div class="qr-container" id="gcashQR">
-    <p><strong>Scan to Pay via GCash</strong></p>
-    <img src="https://i.imgur.com/DXGhTbY.png" alt="GCash QR">
+  <div class="confirm-btn" onclick="openConfirm()">✔ Confirm Payment</div>
+  <div class="contact-btn" onclick="openContact()">💬 Contact Support</div>
 
-    <div class="account-box">
-      <p><strong>Account Name:</strong><br> MA•••N M.</p>
-      <p><strong>Account Number:</strong><br> 0966-508-4666</p>
-      <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
-    </div>
+  <div class="footer">© 2026 MTECH Fiber</div>
+
+</div>
+
+<!-- QR MODAL -->
+<div id="qrModal" class="modal" onclick="closeAll()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closeAll()">✖</span>
+    <h3 id="qrTitle">Scan to Pay</h3>
+    <img id="qrImage">
+
+ <div class="qr-info">
+  <div>MA•••N M.</div>
+
+  <div class="number-box" style="margin-top:8px;">
+    0966-508-4666
   </div>
 
-  <!-- Maya QR -->
-  <div class="qr-container" id="mayaQR">
-    <p><strong>Scan to Pay via Maya</strong></p>
-    <img src="https://i.imgur.com/pakdCyM.png" alt="Maya QR">
+  <button id="copyBtn" class="copy-btn" 
+    onclick="copyNumber()" 
+    style="width:100%; margin-top:8px;">
+    COPY NUMBER
+  </button>
 
-    <div class="account-box">
-      <p><strong>Account Name:</strong><br> MA•••N M.</p>
-      <p><strong>Account Number:</strong><br> 0966-508-4666</p>
-      <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
-    </div>
+  <div id="copiedMsg" class="copied-msg">Copied!</div>
+</div>
+
   </div>
+</div>
 
-  <a href="https://mtechfiberph.com/" 
-     target="_blank" 
-     class="confirm-btn">
-     Confirm Payment
-  </a>
+<!-- CONFIRM MODAL -->
+<div id="confirmModal" class="modal" onclick="closeAll()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closeAll()">✖</span>
+    <h3>Payment Confirmation</h3>
+    <img src="https://i.imgur.com/OZnjpUv.gif">
+  </div>
+</div>
 
-  <div class="footer">
-    © 2026 MTECH Fiber | Secure Access Portal
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal" onclick="closeAll()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closeAll()">✖</span>
+    <h3>Contact Support</h3>
+
+    <button class="option-btn fb-btn" onclick="openMessenger()">💬 Facebook Messenger</button>
+    <button class="option-btn call-btn" onclick="window.location.href='tel:09665084666'">📞 Call Now</button>
+    <button class="option-btn text-btn" onclick="window.location.href='sms:09665084666'">📩 Send SMS</button>
+  </div>
+</div>
+
+<!-- MESSENGER MODAL -->
+<div id="messengerModal" class="modal" onclick="closeAll()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close-btn" onclick="closeAll()">✖</span>
+    <h3>Chat via Messenger</h3>
+    <img src="https://i.imgur.com/OZnjpUv.gif">
   </div>
 </div>
 
 <script>
+function openQR(type) {
+  const modal = document.getElementById("qrModal");
+  const qrImage = document.getElementById("qrImage");
+  const qrTitle = document.getElementById("qrTitle");
+
+  if (type === "gcash") {
+    qrImage.src = "https://i.imgur.com/DXGhTbY.png";
+    qrTitle.innerText = "Scan to Pay (GCash)";
+  }
+
+  if (type === "maya") {
+    qrImage.src = "https://i.imgur.com/pakdCyM.png";
+    qrTitle.innerText = "Scan to Pay (Maya)";
+  }
+
+  modal.style.display = "flex";
+}
+
+function openConfirm() {
+  document.getElementById("confirmModal").style.display = "flex";
+}
+
+function openContact() {
+  document.getElementById("contactModal").style.display = "flex";
+}
+
+function openMessenger() {
+  document.getElementById("messengerModal").style.display = "flex";
+}
+
 function copyNumber() {
-  navigator.clipboard.writeText("0966-508-4666");
-  alert("Number copied successfully!");
+  const number = "09665084666";
+  navigator.clipboard.writeText(number);
+
+  const btn = document.getElementById("copyBtn");
+  const msg = document.getElementById("copiedMsg");
+
+  btn.innerText = "COPIED ✓";
+  btn.style.background = "#16a34a";
+  msg.style.opacity = "1";
+
+  setTimeout(() => {
+    btn.innerText = "COPY";
+    btn.style.background = "#22c55e";
+    msg.style.opacity = "0";
+  }, 1500);
 }
 
-function showGCash() {
-  document.getElementById("gcashQR").style.display = "block";
-  document.getElementById("mayaQR").style.display = "none";
-}
-
-function showMaya() {
-  document.getElementById("mayaQR").style.display = "block";
-  document.getElementById("gcashQR").style.display = "none";
+function closeAll() {
+  document.getElementById("qrModal").style.display = "none";
+  document.getElementById("confirmModal").style.display = "none";
+  document.getElementById("contactModal").style.display = "none";
+  document.getElementById("messengerModal").style.display = "none";
 }
 </script>
 
 </body>
 </html>
-
-
