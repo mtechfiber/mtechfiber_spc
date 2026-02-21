@@ -186,9 +186,9 @@ body {
   display: block;
 }
 
-.fb-btn { background: #1877f2; }
 .call-btn { background: #16a34a; }
 .text-btn { background: #f59e0b; }
+
 </style>
 </head>
 
@@ -248,29 +248,19 @@ body {
     <span class="close-btn" onclick="closeAll()">✖</span>
     <h3>Contact Support</h3>
 
-    <button class="option-btn fb-btn" onclick="openMessenger()">💬 Facebook Messenger</button>
-
     <a href="tel:+639665084666" class="option-btn call-btn">
       📞 Call Now
     </a>
 
-    <button class="option-btn text-btn" onclick="sendSMS()">
+    <a href="sms:+639665084666" class="option-btn text-btn">
       📩 Send SMS
-    </button>
+    </a>
 
-  </div>
-</div>
-
-<!-- MESSENGER MODAL -->
-<div id="messengerModal" class="modal" onclick="closeAll()">
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <span class="close-btn" onclick="closeAll()">✖</span>
-    <h3>Chat via Messenger</h3>
-    <img src="https://i.imgur.com/dwFeZGq.png">
   </div>
 </div>
 
 <script>
+
 function openQR(type) {
   const modal = document.getElementById("qrModal");
   const qrImage = document.getElementById("qrImage");
@@ -291,23 +281,6 @@ function openQR(type) {
 
 function openContact() {
   document.getElementById("contactModal").style.display = "flex";
-}
-
-function openMessenger() {
-  document.getElementById("messengerModal").style.display = "flex";
-}
-
-function sendSMS() {
-  const number = "+639665084666";
-  const message = "Hi MTECH Fiber, I already sent my payment.";
-  const encodedMessage = encodeURIComponent(message);
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  if (isIOS) {
-    window.location.href = `sms:${number}&body=${encodedMessage}`;
-  } else {
-    window.location.href = `sms:${number}?body=${encodedMessage}`;
-  }
 }
 
 function copyNumber() {
@@ -336,8 +309,8 @@ function copyNumber() {
 function closeAll() {
   document.getElementById("qrModal").style.display = "none";
   document.getElementById("contactModal").style.display = "none";
-  document.getElementById("messengerModal").style.display = "none";
 }
+
 </script>
 
 </body>
