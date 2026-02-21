@@ -48,7 +48,7 @@ body {
 }
 
 .logo img {
-  width: 300px;
+  width: 120px;
   margin-bottom: 15px;
 }
 
@@ -74,21 +74,29 @@ body {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .gcash-btn { background: #22c55e; }
+.gcash-btn:hover { background: #16a34a; }
+
 .maya-btn { background: #00b14f; }
+.maya-btn:hover { background: #009944; }
 
 .contact-btn {
   display: block;
   padding: 12px;
   border-radius: 10px;
+  text-decoration: none;
+  color: white;
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 12px;
+  transition: 0.3s;
   cursor: pointer;
-  text-align: center;
   background: #0084ff;
 }
+
+.contact-btn:hover { background: #006fd6; }
 
 .footer {
   margin-top: 15px;
@@ -96,7 +104,7 @@ body {
   opacity: 0.6;
 }
 
-/* MODALS */
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -116,14 +124,8 @@ body {
   border-radius: 15px;
   text-align: center;
   position: relative;
-  width: 320px;
+  width: 300px;
   animation: fadeIn 0.3s ease;
-}
-
-.modal-content img {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 10px;
 }
 
 .close-btn {
@@ -134,45 +136,19 @@ body {
   cursor: pointer;
 }
 
-/* QR INFO */
-.qr-info {
-  margin-top: 15px;
+.account-info {
   font-size: 14px;
+  margin-top: 10px;
+  line-height: 1.6;
 }
 
-.number-box {
-  background: rgba(255,255,255,0.08);
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 8px;
+.account-number {
+  font-size: 20px;
   font-weight: bold;
+  margin-top: 5px;
 }
 
-.copy-btn {
-  background: #22c55e;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  color: white;
-  width: 100%;
-  margin-top: 8px;
-  transition: 0.3s;
-}
-
-.copy-btn:hover {
-  background: #16a34a;
-}
-
-.copied-msg {
-  font-size: 12px;
-  color: #22c55e;
-  margin-top: 6px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
+.copy-btn,
 .option-btn {
   margin-top: 12px;
   padding: 10px;
@@ -182,13 +158,16 @@ body {
   font-weight: bold;
   cursor: pointer;
   color: white;
-  text-decoration: none;
-  display: block;
 }
 
-.call-btn { background: #16a34a; }
-.text-btn { background: #f59e0b; }
+.copy-btn { background: #2563eb; }
+.copy-btn:hover { background: #1d4ed8; }
 
+.call-btn { background: #16a34a; }
+.call-btn:hover { background: #15803d; }
+
+.text-btn { background: #f59e0b; }
+.text-btn:hover { background: #d97706; }
 </style>
 </head>
 
@@ -197,7 +176,7 @@ body {
 <div class="container">
 
   <div class="logo">
-    <img src="https://i.imgur.com/ujB2RRt.gif">
+    <img src="https://i.imgur.com/cxxafdN.jpeg" alt="Logo">
   </div>
 
   <h2>Service Temporarily Restricted</h2>
@@ -208,37 +187,35 @@ body {
   </div>
 
   <div class="payment-group">
-    <button class="gcash-btn" onclick="openQR('gcash')">💳 GCash</button>
-    <button class="maya-btn" onclick="openQR('maya')">💳 Maya</button>
+    <button class="gcash-btn" onclick="openPayment('GCash')">💳 GCash</button>
+    <button class="maya-btn" onclick="openPayment('Maya')">💳 Maya</button>
   </div>
 
-  <div class="contact-btn" onclick="openContact()">💬 Contact Support</div>
+  <div class="contact-btn" onclick="openContact()">
+     📞 Contact Support
+  </div>
 
-  <div class="footer">© 2026 MTECH Fiber</div>
+  <div class="footer">
+    © 2026 MTECHFIBER | Secure Access Portal
+  </div>
 
 </div>
 
-<!-- QR MODAL -->
-<div id="qrModal" class="modal" onclick="closeAll()">
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal" onclick="closeAll()">
   <div class="modal-content" onclick="event.stopPropagation()">
     <span class="close-btn" onclick="closeAll()">✖</span>
-    <h3 id="qrTitle">Scan to Pay</h3>
-    <img id="qrImage">
+    <h3 id="payTitle">Payment Details</h3>
 
-    <div class="qr-info">
-      <div>MA•••N M.</div>
+    <div class="account-info">
+      <div><strong>Account Name:</strong></div>
+      <div>Esmael Laguiab</div>
 
-      <div class="number-box">
-        0966-508-4666
-      </div>
-
-      <button id="copyBtn" class="copy-btn" onclick="copyNumber()">
-        COPY NUMBER
-      </button>
-
-      <div id="copiedMsg" class="copied-msg">Copied!</div>
+      <div style="margin-top:10px;"><strong>Account Number:</strong></div>
+      <div id="accNumber" class="account-number">0939-521-0696</div>
     </div>
 
+    <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
   </div>
 </div>
 
@@ -248,69 +225,39 @@ body {
     <span class="close-btn" onclick="closeAll()">✖</span>
     <h3>Contact Support</h3>
 
-    <a href="tel:+639665084666" class="option-btn call-btn">
+    <button class="option-btn call-btn"
+      onclick="window.location.href='tel:0939-521-0696'">
       📞 Call Now
-    </a>
+    </button>
 
-    <a href="sms:+639665084666" class="option-btn text-btn">
+    <button class="option-btn text-btn"
+      onclick="window.location.href='sms:09395210696'">
       📩 Send SMS
-    </a>
+    </button>
 
   </div>
 </div>
 
 <script>
-
-function openQR(type) {
-  const modal = document.getElementById("qrModal");
-  const qrImage = document.getElementById("qrImage");
-  const qrTitle = document.getElementById("qrTitle");
-
-  if (type === "gcash") {
-    qrImage.src = "https://i.imgur.com/DXGhTbY.png";
-    qrTitle.innerText = "Scan to Pay (GCash)";
-  }
-
-  if (type === "maya") {
-    qrImage.src = "https://i.imgur.com/pakdCyM.png";
-    qrTitle.innerText = "Scan to Pay (Maya)";
-  }
-
-  modal.style.display = "flex";
+function openPayment(type) {
+  document.getElementById("payTitle").innerText = "Pay via " + type;
+  document.getElementById("paymentModal").style.display = "flex";
 }
 
 function openContact() {
   document.getElementById("contactModal").style.display = "flex";
 }
 
-function copyNumber() {
-  const number = "09665084666";
-  const textarea = document.createElement("textarea");
-  textarea.value = number;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
-
-  const btn = document.getElementById("copyBtn");
-  const msg = document.getElementById("copiedMsg");
-
-  btn.innerText = "✓ COPIED";
-  btn.style.background = "#16a34a";
-  msg.style.opacity = "1";
-
-  setTimeout(() => {
-    btn.innerText = "COPY NUMBER";
-    btn.style.background = "#22c55e";
-    msg.style.opacity = "0";
-  }, 1500);
-}
-
 function closeAll() {
-  document.getElementById("qrModal").style.display = "none";
+  document.getElementById("paymentModal").style.display = "none";
   document.getElementById("contactModal").style.display = "none";
 }
 
+function copyNumber() {
+  const number = document.getElementById("accNumber").innerText;
+  navigator.clipboard.writeText(number);
+  alert("Number Copied!");
+}
 </script>
 
 </body>
