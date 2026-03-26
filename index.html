@@ -48,7 +48,7 @@ body {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 750;
   margin-bottom: 10px;
   color: #aaaaaa;
@@ -102,6 +102,10 @@ h2 {
   background: linear-gradient(135deg, #00b14f, #008f3f);
 }
 
+.bpi-btn {
+  background: linear-gradient(135deg, #b11116, #7a0c10);
+}
+
 .contact-btn {
   display: block;
   padding: 14px;
@@ -128,15 +132,17 @@ h2 {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.85);
+
+  /* OLD */
+  /* background: rgba(0,0,0,0.85); */
+
+  /* NEW (transparent glass) */
+  background: rgba(0, 0, 0, 0.2);  /* mas light */
+  backdrop-filter: blur(6px);     /* glass effect */
+
   justify-content: center;
   align-items: center;
   animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .modal-content {
@@ -251,7 +257,7 @@ h2 {
 
   <div class="contact-btn" onclick="openContact()">💬 Contact Support</div>
 
-  <div class="footer">© 2026 MTECHFIBER | Secure Access Portal</div>
+  <div class="footer">© 2026 MTECH Fiber | Secure Access Portal</div>
 </div>
 
 <!-- QR MODAL -->
@@ -260,14 +266,14 @@ h2 {
     <span class="close-btn" onclick="closeAll()">✖</span>
     <h3 id="qrTitle">Scan to Pay</h3>
     <img id="qrImage">
-    <div>MA•••N M.</div>
-    <div class="number-box" id="payNumber">0966-508-4666</div>
+<div id="payName">XXXXXXXXXXXXX</div>
+<div class="number-box" id="payNumber">XXXXXXXXXXXXX</div>
     <button class="copy-btn" onclick="copyQRNumber(this)">COPY NUMBER</button>
 
     <div class="payment-note">
       Once the payment has been sent, kindly provide the account name and 
       reference number through Messenger or SMS.
-      <br><br>Facebook Page: MTECH Fiber
+      <br><br>Facebook: MTECH Fiber
       <br>Phone: 0924-103-0898
     </div>
   </div>
@@ -300,16 +306,23 @@ function openQR(type) {
   const modal = document.getElementById("qrModal");
   const qrImage = document.getElementById("qrImage");
   const qrTitle = document.getElementById("qrTitle");
+  const payNumber = document.getElementById("payNumber");
+  const payName = document.getElementById("payName");
 
   if (type === "gcash") {
-    qrImage.src = "gcash.png";
+    qrImage.src = "`gcash.png";
     qrTitle.innerText = "Scan to Pay (GCash)";
+    payName.innerText = "MA•••N M.";
+    payNumber.innerText = "0966-508-4666";
   }
 
   if (type === "maya") {
-    qrImage.src = "maya.png";
+    qrImage.src = "`maya.png";
     qrTitle.innerText = "Scan to Pay (Maya)";
+    payName.innerText = "MA•••N M.";
+    payNumber.innerText = "0966-508-4666";
   }
+
 
   modal.style.display = "flex";
 }
@@ -367,7 +380,21 @@ function copyContactNumber(button) {
   button.innerText = "✓ COPIED";
   setTimeout(() => button.innerText = "📋 Copy Number", 1500);
 }
+
+/* MUSIC AUTO PLAY */
+document.addEventListener("click", function(){
+let music = document.getElementById("bgMusic");
+music.play();
+}, { once:true });
+
 </script>
+
+<audio id="bgMusic" autoplay loop>
+<source src="Audio2.mp3" type="audio/mpeg">
+</audio>
+
+
+
 
 </body>
 </html>
